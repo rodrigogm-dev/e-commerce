@@ -1,2 +1,43 @@
 .main-content {
+  padding: 40px 0;
+  display: flex;
+  justify-content: center;
+  align-items: start;
+  flex-wrap: wrap;
+  gap: 40px;
+  background-color: lightslategray;
+}
+
+.error-message {
+  padding: 20px;
+  color: white;
+  font-size: 1.4em;
+}
+
+.product-card {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  padding: 20px;
+  background-color: white;
+  border-radius: 10px;
+}
+
+.product-title,
+.product-price {
+  margin: 15px 20px 25px;
+  width: 250px;
+  text-align: center;
+  font-size: 1.4em;
+  font-weight: bold;
+}
+
+.product-price {
+  margin: 20px 20px 5px;
+}
+
+.product-image {
+  width: 250px;
+  height: auto;
 }
