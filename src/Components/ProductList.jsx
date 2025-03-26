@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react'
 import './ProductList.css'
 
-function ProductList () {
+function ProductList ({ addToCart }) {
   const [products, setProducts] = useState([])
   const [errorMessage, setErrorMessage] = useState('')
 
@@ -21,20 +21,32 @@ function ProductList () {
     requestProducs()
   }, [])
 
+  const handleAddToCart = e => {
+    e.preventDefault()
+    e.target.disabled = true
+  }
+
   return (
     <div className='main-content'>
       {errorMessage ? (
         <p className='error-message'>{errorMessage}</p>
       ) : (
-        products.map(prod => (
-          <div key={prod.id} className='product-card'>
-            <p className='product-title'>{prod.title}</p>
+        products.map(product => (
+          <div key={product.id} className='product-card'>
+            <p className='product-title'>{product.title}</p>
             <img
               className='product-image'
-              src={prod.image}
-              alt={prod.title}
+              src={product.image}
+              alt={product.title}
             ></img>
-            <p className='product-price'>${prod.price}</p>
+            <p className='product-price'>${product.price}</p>
+            <button
+              key={product.id}
+              className='product-button'
+              onClick={e => addToCart(product)}
+            >
+              Add
+            </button>
           </div>
         ))
       )}

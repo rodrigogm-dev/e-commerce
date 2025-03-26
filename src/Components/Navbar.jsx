@@ -2,7 +2,7 @@ import { useState } from 'react'
 import storeSign from '../assets/store-sign.svg'
 import './Navbar.css'
 
-function Navbar () {
+function Navbar ({ showCart, setShowCart }) {
   return (
     <div className='navbar'>
       <div className='tag'>
@@ -33,6 +33,7 @@ function Navbar () {
         <a href='/'>
           <h1 className='cart-items'>{/* {handleCartItemsNumber()} */}</h1>
           <svg
+            onClick={setShowCart(!showCart)}
             xmlns='http://www.w3.org/2000/svg'
             viewBox='0 0 256 256'
             id='IconChangeColor'
