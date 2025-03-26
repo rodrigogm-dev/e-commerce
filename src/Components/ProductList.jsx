@@ -12,9 +12,7 @@ function ProductList () {
       const data = await response.json()
       setProducts(data)
     } catch (error) {
-      setErrorMessage(
-        'Lista de productos no disponible. Inténtelo de nuevo más tarde.'
-      )
+      setErrorMessage('Lista de productos no disponible por ahora.')
       console.error('Error al solicitar los productos')
     }
   }
