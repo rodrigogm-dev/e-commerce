@@ -9,11 +9,11 @@ function App () {
   const [showCart, setShowCart] = useState(false)
 
   const addToCart = product => {
-    setCart([...cart, product])
+    setCart(prevCart => [...prevCart, product])
   }
 
   const removeFromCart = productId => {
-    setCart(cart.filter(product => product.id !== productId))
+    setCart(prevCart => prevCart.filter(item => item.id !== productId))
   }
 
   return (
@@ -23,13 +23,13 @@ function App () {
       </div>
       <div className='app-main'>
         {showCart ? (
-          <CartList cart={cart} removeFromCart={removeFromCart} />
-        ) : (
-          <ProductList
+          <CartList
             cart={cart}
-            addToCart={addToCart}
             removeFromCart={removeFromCart}
+            setShowCart={setShowCart}
           />
+        ) : (
+          <ProductList addToCart={addToCart} cart={cart} />
         )}
       </div>
     </div>

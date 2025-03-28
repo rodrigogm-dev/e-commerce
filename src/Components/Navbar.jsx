@@ -6,7 +6,7 @@ function Navbar ({ showCart, setShowCart }) {
   return (
     <div className='navbar'>
       <div className='tag'>
-        <a href='/'>
+        <a>
           <div className='store'>
             <svg
               className='store-sign'
@@ -30,10 +30,9 @@ function Navbar ({ showCart, setShowCart }) {
         </a>
       </div>
       <div className='cart'>
-        <a href='/'>
+        <a onClick={() => setShowCart(prevState => !prevState)}>
           <h1 className='cart-items'>{/* {handleCartItemsNumber()} */}</h1>
           <svg
-            onClick={setShowCart(!showCart)}
             xmlns='http://www.w3.org/2000/svg'
             viewBox='0 0 256 256'
             id='IconChangeColor'

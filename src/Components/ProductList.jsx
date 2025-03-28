@@ -1,30 +1,43 @@
 import React, { useState, useEffect } from 'react'
 import './ProductList.css'
 
-function ProductList ({ addToCart }) {
+function ProductList ({ addToCart, cart }) {
   const [products, setProducts] = useState([])
   const [errorMessage, setErrorMessage] = useState('')
-
-  async function requestProducs () {
-    const url = `https://fakestoreapi.com/products`
-    try {
-      const response = await fetch(url)
-      const data = await response.json()
-      setProducts(data)
-    } catch (error) {
-      setErrorMessage('Lista de productos no disponible por ahora.')
-      console.error('Error al solicitar los productos')
-    }
-  }
+  const [buttons, setButtons] = useState({})
 
   useEffect(() => {
-    requestProducs()
+    const requestProducts = async () => {
+      try {
+        const response = await fetch('https://fakestoreapi.com/products')
+        const data = await response.json()
+        setProducts(data)
+      } catch (error) {
+        console.error('Error requesting products.')
+        setErrorMessage('Unavailable, try later please.')
+      }
+    }
+
+    requestProducts()
   }, [])
 
-  const handleAddToCart = e => {
-    e.preventDefault()
-    e.target.disabled = true
-  }
+  useEffect(() => {
+    if (cart.length === 0) return
+
+    const cartIds = cart.map(product => product.id)
+
+    const updatedButtons = {}
+    cartIds.forEach(id => {
+      updatedButtons[id] = true
+    })
+
+    setButtons(updatedButtons)
+  }, [cart])
+
+  //para ver el estado de buttons luego de renderizar
+  useEffect(() => {
+    console.log(buttons)
+  }, [buttons])
 
   return (
     <div className='main-content'>
@@ -41,9 +54,13 @@ function ProductList ({ addToCart }) {
             ></img>
             <p className='product-price'>${product.price}</p>
             <button
+              id={product.id}
+              disabled={buttons[product.id] || false}
               key={product.id}
               className='product-button'
-              onClick={e => addToCart(product)}
+              onClick={() => {
+                addToCart(product)
+              }}
             >
               Add
             </button>
