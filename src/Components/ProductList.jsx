@@ -13,7 +13,7 @@ function ProductList ({ addToCart, cart }) {
         const data = await response.json()
         setProducts(data)
       } catch (error) {
-        console.error('Error requesting products.')
+        console.error('Error downloading products.')
         setErrorMessage('Unavailable, try later please.')
       }
     }
@@ -36,11 +36,11 @@ function ProductList ({ addToCart, cart }) {
 
   //para ver el estado de buttons luego de renderizar
   useEffect(() => {
-    console.log(buttons)
+    // console.log(buttons)
   }, [buttons])
 
   return (
-    <div className='main-content'>
+    <div className='product-grid'>
       {errorMessage ? (
         <p className='error-message'>{errorMessage}</p>
       ) : (
