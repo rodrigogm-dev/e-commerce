@@ -1,19 +1,14 @@
 .navbar {
-  background-color: darkcyan;
-  min-width: 100%;
-  padding: 5px 50px;
   display: flex;
   align-items: center;
   justify-content: space-between;
+  background-color: darkcyan;
+  min-width: 100%;
+  padding: 5px 50px;
 }
 
-.tag a {
-  text-decoration: none;
-}
-
-.store {
+.store-box {
   display: flex;
-  align-items: center;
 }
 
 .store-sign {
@@ -24,4 +19,8 @@
   font-size: 2.2em;
   padding: 10px 0 0 5px;
   color: lightblue;
+}
+
+.cart-link {
+  cursor: pointer;
 }

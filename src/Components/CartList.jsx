@@ -1,10 +1,12 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import './CartList.css'
 
 function CartList ({ cart, removeFromCart, setShowCart }) {
   const [checkout, setCheckout] = useState({})
 
-  const handleCheckout = () => {}
+  useEffect(() => {
+    const handleCheckout = () => {}
+  }, [cart])
 
   return (
     <div className='root-container'>
@@ -23,7 +25,7 @@ function CartList ({ cart, removeFromCart, setShowCart }) {
               <p className='product-price'>${product.price}</p>
               <div className='buttons-box'>
                 <button className='reduce-button'>-</button>
-                <label className='quantity-label'></label>
+                <span className='product-quantity'></span>
                 <button className='add-button'>+</button>
                 <button
                   className='remove-from-cart'
