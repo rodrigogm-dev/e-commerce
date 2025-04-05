@@ -12,6 +12,8 @@ function App () {
   useEffect(() => {
     if (cart.length > 0) {
       setCartItems(cart.length)
+    } else {
+      setCartItems(0)
     }
   }, [cart])
 

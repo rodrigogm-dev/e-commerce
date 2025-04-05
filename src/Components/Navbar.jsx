@@ -38,7 +38,7 @@ function Navbar ({ cartItems, showCart, setShowCart }) {
           className='cart-link'
           onClick={() => setShowCart(prevState => !prevState)}
         >
-          <h1 className='cart-items'>{cartItems}</h1>
+          <h1 className='cart-items'>{cartItems > 0 ? cartItems : null}</h1>
           <svg
             xmlns='http://www.w3.org/2000/svg'
             viewBox='0 0 256 256'
