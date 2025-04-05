@@ -1,8 +1,8 @@
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 import storeSign from '../assets/store-sign.svg'
 import './Navbar.css'
 
-function Navbar ({ showCart, setShowCart }) {
+function Navbar ({ cartItems, showCart, setShowCart }) {
   return (
     <div className='navbar'>
       <a
@@ -38,7 +38,7 @@ function Navbar ({ showCart, setShowCart }) {
           className='cart-link'
           onClick={() => setShowCart(prevState => !prevState)}
         >
-          <h1 className='cart-items'>{/* {handleCartItemsNumber()} */}</h1>
+          <h1 className='cart-items'>{cartItems}</h1>
           <svg
             xmlns='http://www.w3.org/2000/svg'
             viewBox='0 0 256 256'

@@ -34,11 +34,6 @@ function ProductList ({ addToCart, cart }) {
     setButtons(updatedButtons)
   }, [cart])
 
-  //para ver el estado de buttons luego de renderizar
-  useEffect(() => {
-    // console.log(buttons)
-  }, [buttons])
-
   return (
     <div className='product-grid'>
       {errorMessage ? (

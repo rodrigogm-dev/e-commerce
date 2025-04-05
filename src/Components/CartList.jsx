@@ -1,12 +1,29 @@
 import React, { useEffect, useState } from 'react'
 import './CartList.css'
 
-function CartList ({ cart, removeFromCart, setShowCart }) {
+function CartList ({ cart, setCart, removeFromCart, setShowCart }) {
   const [checkout, setCheckout] = useState({})
 
   useEffect(() => {
     const handleCheckout = () => {}
   }, [cart])
+
+  const decreaseProductQuantity = product => {
+    let quantity = parseInt(product.quantity) - 1
+    product.quantity = quantity
+    setCart(prevCart => prevCart.filter(item => item.id !== product.id))
+    setCart(prevCart => [...prevCart, product])
+    if (product.quantity === 0) {
+      setCart(prevCart => prevCart.filter(item => item.id !== product.id))
+    }
+  }
+
+  const increaseProductQuantity = product => {
+    let quantity = parseInt(product.quantity) + 1
+    product.quantity = quantity
+    setCart(prevCart => prevCart.filter(item => item.id !== product.id))
+    setCart(prevCart => [...prevCart, product])
+  }
 
   return (
     <div className='root-container'>
@@ -24,9 +41,19 @@ function CartList ({ cart, removeFromCart, setShowCart }) {
               />
               <p className='product-price'>${product.price}</p>
               <div className='buttons-box'>
-                <button className='reduce-button'>-</button>
-                <span className='product-quantity'></span>
-                <button className='add-button'>+</button>
+                <button
+                  className='reduce-button'
+                  onClick={() => decreaseProductQuantity(product)}
+                >
+                  -
+                </button>
+                <span className='product-quantity'>{product.quantity}</span>
+                <button
+                  className='add-button'
+                  onClick={() => increaseProductQuantity(product)}
+                >
+                  +
+                </button>
                 <button
                   className='remove-from-cart'
                   onClick={() => removeFromCart(product.id)}
