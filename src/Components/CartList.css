@@ -5,13 +5,27 @@
 }
 
 .error-message {
+  margin-top: 10px;
   padding: 20px;
   color: black;
   font-weight: bold;
   font-size: 1.5em;
 }
 
-.product-grid {
+.cart-grid {
+  display: flex;
+  flex-direction: row;
+}
+
+.cart-total {
+  width: 100%;
+  text-align: center;
+  font-weight: bold;
+  font-size: 2em;
+  margin: 0 auto;
+}
+
+.products-grid {
   display: flex;
   flex-direction: row;
   flex-wrap: wrap;
@@ -49,6 +63,9 @@
 .product-quantity {
   width: 60px;
   height: 30px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
   background-color: white;
   border: 1px solid grey;
 }
@@ -64,13 +81,18 @@
   background-color: red;
   color: white;
 }
+
+.product-subtotal {
+  font-weight: bold;
+  padding-bottom: 15px;
+}
 .go-shopping {
   width: 150px;
   height: auto;
   background-color: #ffbd31;
   color: rgb(10, 10, 80);
   font-weight: bold;
-  margin: 0 0 60px;
+  margin: 20px 0 60px;
   padding: 15px;
   border-radius: 5px;
   cursor: pointer;

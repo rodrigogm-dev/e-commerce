@@ -6,53 +6,44 @@ function CartList ({ cart, setCart, removeFromCart, setShowCart }) {
   const [subtotals, setSubtotals] = useState([])
 
   useEffect(() => {
+    const newSubtotals = cart.map(product => product.quantity * product.price)
+    setSubtotals(newSubtotals)
+
+    const newTotal = newSubtotals.reduce(
+      (accumulator, subtotal) => accumulator + subtotal,
+      0
+    )
+    setTotal(newTotal)
+
     cart.forEach(product => {
-      setSubtotals(prevSubtotals => [
-        ...prevSubtotals,
-        product.quantity * product.price
-      ])
-    })
-    // cart.forEach(product => {
-    //   console.log(product.title, product.quantity)
-    // })
-    let sum = 0
-    subtotals.forEach(subtotal => {
-      // sum += subtotal
-      // setTotal(sum)
-      console.log(subtotal)
+      console.log(product.title, product.quantity)
     })
   }, [cart])
 
   const decreaseProductQuantity = product => {
-    let quantity = parseInt(product.quantity) - 1
-    product.quantity = quantity
-    setCart(prevCart => prevCart.filter(item => item.id !== product.id))
-    setCart(prevCart => [...prevCart, product])
-    if (product.quantity === 0) {
-      setCart(prevCart => prevCart.filter(item => item.id !== product.id))
-    }
-    // cart.forEach(product => {
-    //   console.log(product.title, product.quantity)
-    // })
+    const updatedCart = cart
+      .map(item =>
+        item.id === product.id ? { ...item, quantity: item.quantity - 1 } : item
+      )
+      .filter(item => item.quantity > 0)
+
+    setCart(updatedCart)
   }
 
   const increaseProductQuantity = product => {
-    let quantity = parseInt(product.quantity) + 1
-    product.quantity = quantity
-    setCart(prevCart => prevCart.filter(item => item.id !== product.id))
-    setCart(prevCart => [...prevCart, product])
-    // cart.forEach(product => {
-    //   console.log(product.title, product.quantity)
-    // })
+    const updatedCart = cart.map(item =>
+      item.id === product.id ? { ...item, quantity: item.quantity + 1 } : item
+    )
+    setCart(updatedCart)
   }
   return (
     <div className='root-container'>
-      <div className='product-grid'>
+      <div className='cart-grid'>
         {cart.length === 0 ? (
           <p className='error-message'>Cart is empty.</p>
         ) : (
-          <>
-            <p className='total'>{total}</p>
+          <div className='products-grid'>
+            <p className='cart-total'>Cart Total: ${total.toFixed(2)}</p>
             {cart.map(product => (
               <div className='product-card' key={product.id}>
                 <p className='product-title'>{product.title}</p>
@@ -83,9 +74,12 @@ function CartList ({ cart, setCart, removeFromCart, setShowCart }) {
                     X
                   </button>
                 </div>
+                <p className='product-subtotal'>
+                  Subtotal: ${(product.quantity * product.price).toFixed(2)}
+                </p>
               </div>
             ))}
-          </>
+          </div>
         )}
       </div>
 
